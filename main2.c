@@ -72,6 +72,11 @@ int main()
                 continue;
             }
         }
+        else if(val == 8){
+            if(val_menu_8()){
+                continue;
+            }
+        }
         else if (val == 0){
             exit = true;
         }

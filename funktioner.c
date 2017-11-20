@@ -46,6 +46,7 @@ void print_menu(){
         printf("Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n");
         printf("Välj 6 för: SKENBAR EFFEKT 3-FAS\n");
         printf("Välj 7 för: AKTIV EFFEKT 3-FAS\n");
+        printf("Välj 8 för: Pris för förbukning\n");
         printf("Välj 0 för: FöR ATT AVSLUTA\n");
 }
 double print_resistans(){
@@ -196,5 +197,15 @@ int val_menu_7(){
         return 1;
     }
     printf("%f W\n", aktiv_3fas(u ,i, cos));
+    return 0;
+}
+int val_menu_8(){
+    printf("totalpriset är effekten P i Kilowatt(KW) gånger kostnaden per Kilowatt\n");
+    double p, kostnad;
+    printf("Skriv antal Kilowatt\n");
+    scanf("%lf", &p);
+    printf("skriv pris per Kilowatt\n");
+    scanf("%lf", &kostnad);
+    printf("Totala el kostnaden är %.2f kr\n", multiplicera(p,kostnad));
     return 0;
 }

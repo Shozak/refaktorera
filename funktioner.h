@@ -21,3 +21,4 @@ int val_menu_4(void);
 int val_menu_5(void);
 int val_menu_6(void);
 int val_menu_7(void);
+int val_menu_8(void);
