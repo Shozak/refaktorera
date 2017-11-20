@@ -1,6 +1,6 @@
 
 
-
+double multiplicera(double a , double b);
 double ohms_lag(double r, double i);
 double res_tot(double r1, double r2, double r3);
 double eff_enk(double u, double i);

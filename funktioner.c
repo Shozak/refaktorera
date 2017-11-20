@@ -3,9 +3,11 @@
 #include <math.h>
 #include <limits.h>
 
+double multiplicera(double a , double b){
+    return (a*b);
+}
 double ohms_lag(double r, double i){
-    double u = i * r;
-    return u;
+    return multiplicera( i,r );
 }
 
 double res_tot(double r1, double r2, double r3){
@@ -15,41 +17,36 @@ double res_tot(double r1, double r2, double r3){
 }
 
 double eff_enk(double u, double i){
-    double p = u * i;
-    return p;
+    return multiplicera( u,i );
 }
 
 double sken_eff(double u, double i){
-    double s = u * i;
-    return s;
+    return multiplicera( u,i );
 }
 
 double aktiv_eff(double u, double i, double cos){
-    double p = u * i * cos;
-    return p;
+    return multiplicera( multiplicera( u,i ),cos );
 }
 
 double sken_3fas(double u, double i){
-    double s = u * i * sqrt(3);
-    return s;
+    return multiplicera( multiplicera( u,i ),sqrt(3) );
 }
 
 double aktiv_3fas(double u, double i, double cos){
-    double p = u * i * sqrt(3) * cos;
-    return p;
+    return multiplicera( ( multiplicera( u,i ),sqrt(3) ),cos );
 }
 
 void print_menu(){
         printf("\n");
-        printf("V�lj vilka storheter du vill ber�kna:\n");
-        printf("V�lj 1 f�r: OHMS LAG\n");
-        printf("V�lj 2 f�r: Rtot\n");
-        printf("V�lj 3 f�r: EFFEKTLAGEN ENKEL\n");
-        printf("V�lj 4 f�r: SKENBAR EFFEKT ENFAS\n");
-        printf("V�lj 5 f�r: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n");
-        printf("V�lj 6 f�r: SKENBAR EFFEKT 3-FAS\n");
-        printf("V�lj 7 f�r: AKTIV EFFEKT 3-FAS\n");
-        printf("V�lj 0 f�r: F�R ATT AVSLUTA\n");
+        printf("Välj vilka storheter du vill beräkna:\n");
+        printf("Välj 1 för: OHMS LAG\n");
+        printf("Välj 2 för: Rtot\n");
+        printf("Välj 3 för: EFFEKTLAGEN ENKEL\n");
+        printf("Välj 4 för: SKENBAR EFFEKT ENFAS\n");
+        printf("Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n");
+        printf("Välj 6 för: SKENBAR EFFEKT 3-FAS\n");
+        printf("Välj 7 för: AKTIV EFFEKT 3-FAS\n");
+        printf("Välj 0 för: FöR ATT AVSLUTA\n");
 }
 double print_resistans(){
     double r;
@@ -59,13 +56,13 @@ double print_resistans(){
 }
 double print_ampere(){
     double i;
-    printf("Skriv str�m I < 440 Ampere: \n");
+    printf("Skriv ström I < 440 Ampere: \n");
     scanf("%lf", &i);
     return i;
 }
 double print_volts(){
     double u;
-    printf("Skriv sp�nnngen U i volt(V): \n ");
+    printf("Skriv spännngen U i volt(V): \n ");
     scanf("%lf", &u);
     return u;
 }
@@ -76,12 +73,12 @@ double print_cos(){
     return cos;
 }
 void print_fel(){
-        printf("F�r h�gt v�rde, f�rs�k igen: \n");
+        printf("För högt värde, försök igen: \n");
 }
 
 int val_menu_1(){
-    printf("Ohms lag sp�nningen(volt/V) bet�ckning U lika med Resistansen(Ohm) bet�ckning R \n");
-    printf("g�nger Str�mmen(Ampere) med bet�ckningen I. Kort U=R*I. \n\n");
+    printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n");
+    printf("gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
     double r, i;
     r=print_resistans();
     if(r > 20000){
@@ -97,8 +94,8 @@ int val_menu_1(){
     return 0;
 }
 int val_menu_2(){
-    printf("Resistans sammankopplade i parallella kretsar �r lika med 1 delat Resistans R total �r lika med\n");
-    printf("Resistans 1/R1 + 1/R2 + 1/R3 d� vi h�gst anv�nder tre resistanser.\n\n");
+    printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
+    printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
     double r1,r2,r3;
     r1=print_resistans();
     if(r1 > 20000){
@@ -119,8 +116,8 @@ int val_menu_2(){
     return 0;
 }
 int val_menu_3(){
-    printf("Effektlagen enkel f�r likstr�m �r effekten P i Watt (W) lika med sp�nningen U i volt(V)\n");
-    printf("g�nger str�mmen I i Ampere(A): \n\n");
+    printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n");
+    printf("gånger strömmen I i Ampere(A): \n\n");
     double u, i;
     u=print_volts();
     i=print_ampere();
@@ -132,8 +129,8 @@ int val_menu_3(){
     return 0;
 }
 int val_menu_4(){
-    printf("Skenbar effekt enfas r�knas med storheten VA(VoltAmpere) som �r lika med sp�nningen U i volt(V)\n");
-    printf("g�nger str�mmen I i ampere(A)\n\n");
+    printf("Skenbar effekt enfas räknas med storheten VA(VoltAmpere) som är lika med spänningen U i volt(V)\n");
+    printf("gånger strömmen I i ampere(A)\n\n");
     double u, i;
     u=print_volts();
     i=print_ampere();
@@ -145,8 +142,8 @@ int val_menu_4(){
     return 0;
 }
 int val_menu_5(){
-    printf("Aktiv medelefdekt enfas �r lika med effekt P i watt(W) lika med sp�nningen U i volt(V) g�nger str�mmen I \n");
-    printf("i Ampere g�nger cosinus fi/efkektfaktor < 1:\n\n");
+    printf("Aktiv medelefdekt enfas är lika med effekt P i watt(W) lika med spänningen U i volt(V) gånger strömmen I \n");
+    printf("i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n");
     double u, i, cos;
     u=print_volts();
     i=print_ampere();
@@ -156,19 +153,19 @@ int val_menu_5(){
     }
     cos=print_cos();
     if (cos < 0 && cos > 1){
-        printf("Fel v�rde, f�rs�k igen\n");
+        printf("Fel värde, försök igen\n");
         return 1;
     }
     printf("%f W\n", aktiv_eff(u, i, cos));
     return 0;
 }
 int val_menu_6(){
-    printf("3-fas skenbar effekt �r v�xelsp�nning �r skenbar effekt S i voltampere(VA) lika med sp�nningen U i volt(V) \n");
-    printf("g�nger str�mmen I i ampere(A) g�nger roten ur 3 SQRT(3).\n\n");
+    printf("3-fas skenbar effekt är växelspänning är skenbar effekt S i voltampere(VA) lika med spänningen U i volt(V) \n");
+    printf("gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n");
     double u, i;
     u=print_volts();
     if(u > 400){
-        printf("F�r h�gt v�rde, f�rs�k igen: \n");
+        printf("För högt värde, försök igen: \n");
         return 1;
     }
     i=print_ampere();
@@ -180,8 +177,8 @@ int val_menu_6(){
     return 0;
 }
 int val_menu_7(){
-    printf("3-fas aktiv effekt �r effekten P i Watt(W) lika med sp�nningen U i volt(V) g�nger str�mmen I i ampere(A)\n");
-    printf("g�nger cos < 1 && cos > 0 g�nger roten ur 3 SQRT(3).\n\n");
+    printf("3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen U i volt(V) gånger strömmen I i ampere(A)\n");
+    printf("gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n");
     double u, i, cos;
     u=print_volts();
     if(u > 400){
